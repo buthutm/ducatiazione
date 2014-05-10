@@ -29,8 +29,35 @@ static SimpleMenuSection settings_menu_sections[NUM_SETTINGS_MENU_SECTIONS];
 
 static SimpleMenuItem settings_menu_items[NUM_SETTINGS_MENU_ITEMS];
 
+
+
 //************************************************************************************************
 
+
+static void menu_select_callback_menu_item_4 (){
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Riding Modes Clicked.");
+  // Here we just change the subtitle to a literal string
+  settings_menu_items[0].subtitle = "Currently Touring";
+  // Mark the layer to be updated
+  layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+  //setDictionaryWithClick("Sport", "ON", "OFF", "");
+}
+
+static void menu_select_callback_menu_item_5 (){
+   APP_LOG(APP_LOG_LEVEL_DEBUG, "Heated Grips Clicked.");
+// Here we just change the subtitle to a literal string
+  settings_menu_items[1].subtitle = "Currently ON";
+  // Mark the layer to be updated
+  layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+}
+
+static void menu_select_callback_menu_item_6 (){
+   APP_LOG(APP_LOG_LEVEL_DEBUG, "ABS Clicked.");
+  // Here we just change the subtitle to a literal string
+  settings_menu_items[2].subtitle = "Currently OFF";
+  // Mark the layer to be updated
+  layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+}
 
 void settings_unload()
 {
@@ -50,18 +77,18 @@ static void settings_load() {
     // You should give each menu item a title and callback
     .title = "Riding Modes",
       .subtitle = "Currently Sport",
-    //  .callback = menu_select_callback_menu_item_4,
+      .callback = menu_select_callback_menu_item_4,
   };
   // The menu items appear in the order saved in the menu items array
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     .title = "Heated Grips",
       .subtitle = "Currently OFF",
-   //   .callback = menu_select_callback_menu_item_5,
+      .callback = menu_select_callback_menu_item_5,
   };
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     .title = "ABS",
       .subtitle = "Currently ON",
-   //   .callback = menu_select_callback_menu_item_6,
+      .callback = menu_select_callback_menu_item_6,
   };
 
   // Bind the menu items to the corresponding menu sections
