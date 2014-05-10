@@ -1,7 +1,54 @@
 {
     "appKeys": {},
     "resources": {
-        "media": []
+        "media": [
+            {
+                "name": "IMAGE_STATISTICS_PLACEHOLDER",
+                "file": "images/Capture (1).PNG",
+                "type": "png"
+            },
+            {
+                "name": "IMAGE_APP_ICON_DUCATI",
+                "file": "images/shield1_28x28.png",
+                "type": "png",
+                "menuIcon": true
+            },
+            {
+                "name": "IMAGE_PROFILE_ICON_2UP",
+                "file": "images/profile_tandem1_28x28.png",
+                "type": "png"
+            },
+            {
+                "name": "IMAGE_PROFILE_ICON_RACE",
+                "file": "images/profile_race1_28x28.png",
+                "type": "png"
+            },
+            {
+                "name": "IMAGE_PROFILE_ICON_COMMUTE",
+                "file": "images/profile_commute1_28x28.png",
+                "type": "png"
+            },
+            {
+                "name": "IMAGE_STATUS_BAR_ICON_DUCATI",
+                "file": "images/statusbarAppIcon1_11x11.png",
+                "type": "png"
+            },
+            {
+                "name": "IMAGE_MENU_ICON_STATISTICS",
+                "file": "images/statistics1_28x28.png",
+                "type": "png"
+            },
+            {
+                "name": "IMAGE_MENU_ICON_PROFILES",
+                "file": "images/profiles1_28x28.png",
+                "type": "png"
+            },
+            {
+                "name": "IMAGE_MENU_ICON_SETTINGS",
+                "file": "images/settings1_28x28.png",
+                "type": "png"
+            }
+        ]
     },
     "watchapp": {
         "watchface": false
