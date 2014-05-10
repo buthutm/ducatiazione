@@ -1,5 +1,8 @@
 #include "pebble.h"
 
+//Ducati Azione
+//Michael Buthut
+	
 //Main Screen *************************************************************************************
 #define NUM_FIRST_MENU_SECTIONS 2
 #define NUM_FIRST_MENU_ITEMS 3
@@ -36,15 +39,9 @@ void settings_unload()
 }
 
 
-static void settings_load(int index, void *ctx) {
+static void settings_load() {
 	
 	settings = window_create();
-
-	// Setup the window handlers
-	window_set_window_handlers(settings, (WindowHandlers) {
-	    .load = settings_load,
-		.unload = settings_unload,
-	});
 	
 	int num_a_items = 0;
 
@@ -71,21 +68,26 @@ static void settings_load(int index, void *ctx) {
   settings_menu_sections[0] = (SimpleMenuSection){
     .title = "Settings",
       .num_items = NUM_SETTINGS_MENU_ITEMS,
-      .items = first_menu_items,
+      .items = settings_menu_items,
   };
 
-  Layer *window_layer = window_get_root_layer(window);
+  Layer *window_layer = window_get_root_layer(settings);
   GRect bounds = layer_get_frame(window_layer);
 
-  simple_menu_layer_settings = simple_menu_layer_create(bounds, window, settings_menu_sections, NUM_SETTINGS_MENU_SECTIONS, NULL);
+  simple_menu_layer_settings = simple_menu_layer_create(bounds, settings, settings_menu_sections, NUM_SETTINGS_MENU_SECTIONS, NULL);
 
   layer_add_child(window_layer, simple_menu_layer_get_layer(simple_menu_layer_settings));
+	
   window_stack_push(settings, true); // The back button will dismiss the current window, not close the app.  So just press back to go back to the master view.
+
+
+
 }
 
 
+
 // This initializes the menu upon window load
-void window_load() {
+void main_load() {
 	
 	window = window_create();
 			
@@ -107,7 +109,7 @@ void window_load() {
 	first_menu_items[num_a_items++] = (SimpleMenuItem){
 		.title = "Settings",
 		//	.subtitle = "This has an icon",
-		    .callback = settings_load,
+//		    .callback = settings_load,
 			//  .icon = menu_icon_image3,
 	};
 
@@ -127,7 +129,7 @@ void window_load() {
 	window_stack_push(window, true);
 }
 
-void window_unload() {
+void main_unload() {
 	simple_menu_layer_destroy(simple_main_menu_layer);
 	window_destroy(window);
 }
