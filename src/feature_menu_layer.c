@@ -21,21 +21,29 @@ static char *RIDE_MODES[] = {
 	"Enduro"
 };
 
+static int current_ride_mode = 0;
+
 static char *GRIP[] = {
 	"OFF",
 	"ON"
 };
+
+static int current_grip = 0;
 
 static char *ABS[] = {
 	"OFF",
 	"ON"
 };
 
+static int current_abs = 0;
+
 static char *PROFILES[] = {
 	"Commute",
 	"Race",
 	"2 up"
 };
+
+static int current_profile = 0;
 	
 //Main Screen *************************************************************************************
 #define NUM_FIRST_MENU_SECTIONS 2
@@ -82,7 +90,7 @@ static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tup
 
     case DUCATI_GRIPS_KEY:
    	    APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_GRIPS_KEY");
- 	
+	  	
 		settings_menu_items[1].subtitle = (new_tuple->value->cstring);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
@@ -97,33 +105,103 @@ static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tup
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
      break;
-}
+   }
 	
 }
 
 static void menu_select_callback_menu_item_4 (){
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Riding Modes Clicked.");
 	
-  settings_menu_items[0].subtitle = RIDE_MODES[0];
+  settings_menu_items[0].subtitle = RIDE_MODES[3];
 
   layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+	
+	switch(current_ride_mode){
+		case 0:
+		
+		settings_menu_items[0].subtitle = RIDE_MODES[1];
+		current_ride_mode=1;
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+    	break;
+		
+		case 1:
+		
+		settings_menu_items[0].subtitle = RIDE_MODES[2];
+		current_ride_mode=2;
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+    	break;
+		
+		case 2:
+		
+		settings_menu_items[0].subtitle = RIDE_MODES[3];
+		current_ride_mode=3;
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+    	break;
+		
+		case 3:
+		
+		settings_menu_items[0].subtitle = RIDE_MODES[0];
+		current_ride_mode=0;
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+    	break;
+	}
 
 }
 
 static void menu_select_callback_menu_item_5 (){
-   APP_LOG(APP_LOG_LEVEL_DEBUG, "Heated Grips Clicked.");
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Heated Grips Clicked.");
 
-  settings_menu_items[0].subtitle = GRIP[0];
+	switch(current_grip){
+		case 0:
+		
+		settings_menu_items[1].subtitle = GRIP[1];
+		current_grip=1;
 
-  layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+    	break;
+		
+		case 1:
+		
+		settings_menu_items[1].subtitle = GRIP[0];
+		current_grip=0;
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+    	break;
+	}
 }
 
 static void menu_select_callback_menu_item_6 (){
-   APP_LOG(APP_LOG_LEVEL_DEBUG, "ABS Clicked.");
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "ABS Clicked.");
 	
-	  settings_menu_items[0].subtitle = ABS[0];
+	switch(current_abs){
+		case 0:
+		
+		settings_menu_items[2].subtitle = ABS[1];
+		current_abs=1;
 
-  layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+    	break;
+		
+		case 1:
+		
+		settings_menu_items[2].subtitle = ABS[0];
+		current_abs=0;
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+    	break;
+	}
 }
 
 void settings_unload()
@@ -141,18 +219,18 @@ static void settings_load() {
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     // You should give each menu item a title and callback
     .title = "Riding Modes",
-      .subtitle = RIDE_MODES[0],
+      .subtitle = RIDE_MODES[current_ride_mode],
       .callback = menu_select_callback_menu_item_4,
   };
   // The menu items appear in the order saved in the menu items array
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     .title = "Heated Grips",
-      .subtitle = GRIP[0],
+      .subtitle = GRIP[current_grip],
       .callback = menu_select_callback_menu_item_5,
   };
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     .title = "ABS",
-      .subtitle = ABS[0],
+      .subtitle = ABS[current_abs],
       .callback = menu_select_callback_menu_item_6,
   };
 
@@ -165,20 +243,20 @@ static void settings_load() {
 
   Layer *window_layer = window_get_root_layer(settings);
   GRect bounds = layer_get_frame(window_layer);
-
-  simple_menu_layer_settings = simple_menu_layer_create(bounds, settings, settings_menu_sections, NUM_SETTINGS_MENU_SECTIONS, NULL);
 	
   Tuplet initial_values[] = {
-   TupletCString(DUCATI_RIDE_MODE_KEY, RIDE_MODES[0] ),
-   TupletCString(DUCATI_GRIPS_KEY, GRIP[0]),
-   TupletCString(DUCATI_ABS_KEY, ABS[0]),  
-   TupletCString(DUCATI_PROFILES_KEY, PROFILES[0])   
+   TupletCString(DUCATI_RIDE_MODE_KEY, RIDE_MODES[current_ride_mode] ),
+   TupletCString(DUCATI_GRIPS_KEY, GRIP[current_grip]),
+   TupletCString(DUCATI_ABS_KEY, ABS[current_abs]),  
+   TupletCString(DUCATI_PROFILES_KEY, PROFILES[current_profile])   
  };
 	
   app_sync_init(&sync, sync_buffer, sizeof(sync_buffer), initial_values, ARRAY_LENGTH(initial_values),
       sync_tuple_changed_callback, sync_error_callback, NULL);
 
+  simple_menu_layer_settings = simple_menu_layer_create(bounds, settings, settings_menu_sections, NUM_SETTINGS_MENU_SECTIONS, NULL);
 
+	
   layer_add_child(window_layer, simple_menu_layer_get_layer(simple_menu_layer_settings));
 	
  // window_stack_push(settings, true); // The back button will dismiss the current window, not close the app.  So just press back to go back to the master view.
