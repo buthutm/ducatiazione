@@ -109,6 +109,22 @@ static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tup
 	
 }
 
+static void setDictionaryWithClick(char* mode, char* grips, char* abs, char* profile){
+  Tuplet new_tuples[] = {
+   TupletCString(DUCATI_RIDE_MODE_KEY, mode ),
+   TupletCString(DUCATI_GRIPS_KEY, grips),
+   TupletCString(DUCATI_ABS_KEY, abs),  
+   TupletCString(DUCATI_PROFILES_KEY, profile)   
+ };
+	
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_RIDE_MODE_KEY: %s",mode);
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_GRIPS_KEY: %s",grips);
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_ABS_KEY: %s",abs);
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_PROFILES_KEY: %s",profile);
+	
+ app_sync_set(&sync, new_tuples, 3);
+}
+
 static void menu_select_callback_menu_item_4 (){
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Riding Modes Clicked.");
 	
@@ -121,6 +137,7 @@ static void menu_select_callback_menu_item_4 (){
 		
 		settings_menu_items[0].subtitle = RIDE_MODES[1];
 		current_ride_mode=1;
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -130,6 +147,7 @@ static void menu_select_callback_menu_item_4 (){
 		
 		settings_menu_items[0].subtitle = RIDE_MODES[2];
 		current_ride_mode=2;
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -139,7 +157,8 @@ static void menu_select_callback_menu_item_4 (){
 		
 		settings_menu_items[0].subtitle = RIDE_MODES[3];
 		current_ride_mode=3;
-
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
+		
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
     	break;
@@ -148,6 +167,7 @@ static void menu_select_callback_menu_item_4 (){
 		
 		settings_menu_items[0].subtitle = RIDE_MODES[0];
 		current_ride_mode=0;
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -164,6 +184,7 @@ static void menu_select_callback_menu_item_5 (){
 		
 		settings_menu_items[1].subtitle = GRIP[1];
 		current_grip=1;
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -173,6 +194,7 @@ static void menu_select_callback_menu_item_5 (){
 		
 		settings_menu_items[1].subtitle = GRIP[0];
 		current_grip=0;
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -188,6 +210,7 @@ static void menu_select_callback_menu_item_6 (){
 		
 		settings_menu_items[2].subtitle = ABS[1];
 		current_abs=1;
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -197,6 +220,7 @@ static void menu_select_callback_menu_item_6 (){
 		
 		settings_menu_items[2].subtitle = ABS[0];
 		current_abs=0;
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
