@@ -1,0 +1,18 @@
+{
+    "appKeys": {},
+    "resources": {
+        "media": []
+    },
+    "watchapp": {
+        "watchface": false
+    },
+    "shortName": "DucatiAzione",
+    "versionLabel": "1.0",
+    "versionCode": 1,
+    "companyName": "michael.buthut@vw.com",
+    "uuid": "49c202a3-ae9e-4cab-93b1-2cb35f004e8c",
+    "capabilities": [
+        ""
+    ],
+    "longName": "DucatiAzione"
+}
