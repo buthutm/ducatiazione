@@ -31,11 +31,11 @@ static char *ABS[] = {
 	"ON"
 };
 
-//static char *PROFILES[] = {
-//	"Commute",
-//	"Race",
-//	"2 up"
-//};
+static char *PROFILES[] = {
+	"Commute",
+	"Race",
+	"2 up"
+};
 	
 //Main Screen *************************************************************************************
 #define NUM_FIRST_MENU_SECTIONS 2
@@ -98,23 +98,22 @@ static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tup
 
      break;
 }
+	
+}
 
 static void menu_select_callback_menu_item_4 (){
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Riding Modes Clicked.");
-  // Here we just change the subtitle to a literal string
-  settings_menu_items[0].subtitle = "Currently Touring";
-  // Mark the layer to be updated
+	
+  settings_menu_items[0].subtitle = RIDE_MODES[0];
+
   layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
-  //setDictionaryWithClick("Sport", "ON", "OFF", "");
+
 }
 
 static void menu_select_callback_menu_item_5 (){
    APP_LOG(APP_LOG_LEVEL_DEBUG, "Heated Grips Clicked.");
 
-	if (grips_on_off == false){
-		settings_menu_items[1].subtitle = "OFF";}
-	else {
-	    settings_menu_items[1].subtitle = "ON";}
+  settings_menu_items[0].subtitle = GRIP[0];
 
   layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 }
@@ -122,24 +121,19 @@ static void menu_select_callback_menu_item_5 (){
 static void menu_select_callback_menu_item_6 (){
    APP_LOG(APP_LOG_LEVEL_DEBUG, "ABS Clicked.");
 	
-	if (abs_on_off == false){
-		settings_menu_items[1].subtitle = "OFF";}
-	else {
-	    settings_menu_items[1].subtitle = "ON";}
+	  settings_menu_items[0].subtitle = ABS[0];
 
   layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 }
 
 void settings_unload()
 {
+	app_sync_deinit(&sync);
 	simple_menu_layer_destroy(simple_menu_layer_settings);
-	window_destroy(settings);
 }
 
 
 static void settings_load() {
-	
-	settings = window_create();
 	
 	int num_a_items = 0;
 
@@ -147,18 +141,18 @@ static void settings_load() {
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     // You should give each menu item a title and callback
     .title = "Riding Modes",
-      .subtitle = "Sport",
+      .subtitle = RIDE_MODES[0],
       .callback = menu_select_callback_menu_item_4,
   };
   // The menu items appear in the order saved in the menu items array
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     .title = "Heated Grips",
-      .subtitle = "OFF",
+      .subtitle = GRIP[0],
       .callback = menu_select_callback_menu_item_5,
   };
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     .title = "ABS",
-      .subtitle = "ON",
+      .subtitle = ABS[0],
       .callback = menu_select_callback_menu_item_6,
   };
 
@@ -173,12 +167,21 @@ static void settings_load() {
   GRect bounds = layer_get_frame(window_layer);
 
   simple_menu_layer_settings = simple_menu_layer_create(bounds, settings, settings_menu_sections, NUM_SETTINGS_MENU_SECTIONS, NULL);
+	
+  Tuplet initial_values[] = {
+   TupletCString(DUCATI_RIDE_MODE_KEY, RIDE_MODES[0] ),
+   TupletCString(DUCATI_GRIPS_KEY, GRIP[0]),
+   TupletCString(DUCATI_ABS_KEY, ABS[0]),  
+   TupletCString(DUCATI_PROFILES_KEY, PROFILES[0])   
+ };
+	
+  app_sync_init(&sync, sync_buffer, sizeof(sync_buffer), initial_values, ARRAY_LENGTH(initial_values),
+      sync_tuple_changed_callback, sync_error_callback, NULL);
+
 
   layer_add_child(window_layer, simple_menu_layer_get_layer(simple_menu_layer_settings));
 	
-  window_stack_push(settings, true); // The back button will dismiss the current window, not close the app.  So just press back to go back to the master view.
-
-
+ // window_stack_push(settings, true); // The back button will dismiss the current window, not close the app.  So just press back to go back to the master view.
 
 }
 
@@ -231,15 +234,33 @@ void main_unload() {
 	simple_menu_layer_destroy(simple_main_menu_layer);
 	window_destroy(window);
 }
+	
+static void init() {
+  settings = window_create();
+
+  window_set_window_handlers(settings, (WindowHandlers) {
+    .load = settings_load,
+    .unload = settings_unload
+  });
+
+  const int inbound_size = 64;
+  const int outbound_size = 16;
+  app_message_open(inbound_size, outbound_size);
+
+  const bool animated = true;
+  window_stack_push(settings, animated);
+}
+
+static void deinit() {
+  window_destroy(settings);
+}
 
 
 int main(void) {
+  init();
 	
-	settings_load();
- 	
-	app_event_loop();
+  app_event_loop();
 	
-	settings_unload();
-
+  deinit();
 }
 
