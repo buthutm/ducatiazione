@@ -3,6 +3,40 @@
 //Ducati Azione
 //Michael Buthut
 	
+static AppSync sync;
+static uint8_t sync_buffer[32];
+
+enum DUCATI_KEY {
+  DUCATI_RIDE_MODE_KEY = 0x0,         
+  DUCATI_GRIPS_KEY = 0x1, 
+  DUCATI_ABS_KEY = 0x2,
+  DUCATI_PROFILES_KEY = 0x3
+};
+
+
+static char *RIDE_MODES[] = {
+	"Sport",
+	"Urban",
+	"Touring",
+	"Enduro"
+};
+
+static char *GRIP[] = {
+	"OFF",
+	"ON"
+};
+
+static char *ABS[] = {
+	"OFF",
+	"ON"
+};
+
+//static char *PROFILES[] = {
+//	"Commute",
+//	"Race",
+//	"2 up"
+//};
+	
 //Main Screen *************************************************************************************
 #define NUM_FIRST_MENU_SECTIONS 2
 #define NUM_FIRST_MENU_ITEMS 3
@@ -29,10 +63,41 @@ static SimpleMenuSection settings_menu_sections[NUM_SETTINGS_MENU_SECTIONS];
 
 static SimpleMenuItem settings_menu_items[NUM_SETTINGS_MENU_ITEMS];
 
-
-
 //************************************************************************************************
 
+static void sync_error_callback(DictionaryResult dict_error, AppMessageResult app_message_error, void *context) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "App Message Sync Error: %d", app_message_error);
+}
+
+static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tuple, const Tuple* old_tuple, void* context) {
+  switch (key) {
+    case DUCATI_RIDE_MODE_KEY:
+	    APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_RIDE_MODE_KEY");
+ 	
+		settings_menu_items[0].subtitle = (new_tuple->value->cstring);
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+      break;
+
+    case DUCATI_GRIPS_KEY:
+   	    APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_GRIPS_KEY");
+ 	
+		settings_menu_items[1].subtitle = (new_tuple->value->cstring);
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+      break;
+	  
+	case DUCATI_ABS_KEY:
+      	APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_ABS_KEY");
+ 	
+		settings_menu_items[2].subtitle = (new_tuple->value->cstring);
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+     break;
+}
 
 static void menu_select_callback_menu_item_4 (){
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Riding Modes Clicked.");
@@ -45,17 +110,23 @@ static void menu_select_callback_menu_item_4 (){
 
 static void menu_select_callback_menu_item_5 (){
    APP_LOG(APP_LOG_LEVEL_DEBUG, "Heated Grips Clicked.");
-// Here we just change the subtitle to a literal string
-  settings_menu_items[1].subtitle = "Currently ON";
-  // Mark the layer to be updated
+
+	if (grips_on_off == false){
+		settings_menu_items[1].subtitle = "OFF";}
+	else {
+	    settings_menu_items[1].subtitle = "ON";}
+
   layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 }
 
 static void menu_select_callback_menu_item_6 (){
    APP_LOG(APP_LOG_LEVEL_DEBUG, "ABS Clicked.");
-  // Here we just change the subtitle to a literal string
-  settings_menu_items[2].subtitle = "Currently OFF";
-  // Mark the layer to be updated
+	
+	if (abs_on_off == false){
+		settings_menu_items[1].subtitle = "OFF";}
+	else {
+	    settings_menu_items[1].subtitle = "ON";}
+
   layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 }
 
@@ -76,18 +147,18 @@ static void settings_load() {
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     // You should give each menu item a title and callback
     .title = "Riding Modes",
-      .subtitle = "Currently Sport",
+      .subtitle = "Sport",
       .callback = menu_select_callback_menu_item_4,
   };
   // The menu items appear in the order saved in the menu items array
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     .title = "Heated Grips",
-      .subtitle = "Currently OFF",
+      .subtitle = "OFF",
       .callback = menu_select_callback_menu_item_5,
   };
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
     .title = "ABS",
-      .subtitle = "Currently ON",
+      .subtitle = "ON",
       .callback = menu_select_callback_menu_item_6,
   };
 
