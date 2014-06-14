@@ -346,7 +346,7 @@ static void init() {
   });
 
   const int inbound_size = 64;
-  const int outbound_size = 16;
+  const int outbound_size = 64;
   app_message_open(inbound_size, outbound_size);
 
   const bool animated = true;
