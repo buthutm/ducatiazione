@@ -1,16 +1,10 @@
 {
+    "companyName": "michael.buthut@vw.com",
     "shortName": "Ducati Azione",
-    "versionCode": 1,
+    "longName": "Ducati Azione",
     "watchapp": {
         "watchface": false
     },
-    "capabilities": [
-        ""
-    ],
-    "versionLabel": "0.9",
-    "companyName": "michael.buthut@vw.com",
-    "longName": "Ducati Azione",
-    "appKeys": {},
     "uuid": "49c202a3-ae9e-4cab-93b1-2cb35f004e8c",
     "resources": {
         "media": [
@@ -20,10 +14,10 @@
                 "type": "png"
             },
             {
-                "menuIcon": true,
                 "file": "images/shield1_28x28.png",
                 "name": "IMAGE_APP_ICON_DUCATI",
-                "type": "png"
+                "type": "png",
+                "menuIcon": true
             },
             {
                 "file": "images/profile_tandem1_28x28.png",
@@ -61,5 +55,11 @@
                 "type": "png"
             }
         ]
-    }
+    },
+    "capabilities": [
+        ""
+    ],
+    "appKeys": {},
+    "versionLabel": "0.9",
+    "versionCode": 1
 }

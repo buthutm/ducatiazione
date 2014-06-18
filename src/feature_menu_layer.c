@@ -21,21 +21,66 @@ static char *RIDE_MODES[] = {
 	"Enduro"
 };
 
-static int current_ride_mode = 0;
-
 static char *GRIP[] = {
 	"OFF",
 	"ON"
 };
-
-static int current_grip = 0;
 
 static char *ABS[] = {
 	"OFF",
 	"ON"
 };
 
+static char *LowBeam[] = {
+	"OFF",
+	"ON"
+};
+
+static char *Highbeam[] = {
+	"OFF",
+	"ON"
+};
+
+static char *Flasher[] = {
+	"OFF",
+	"Left",
+	"Right"
+};
+
+static char *Honk[] = {
+	"OFF",
+	"ON"
+};
+
+static char *Engine[] = {
+	"OFF",
+	"ON"
+};
+
+static char *Power[] = {
+	"OFF",
+	"ON"
+};
+
+static int current_ride_mode = 0;
+
+static int current_grip = 0;
+
 static int current_abs = 0;
+
+static int current_profile = 0;
+
+static int current_lowbeam = 0;
+
+static int current_highbeam = 0;
+
+static int current_flasher = 0;
+
+static int current_honk = 0;
+
+static int current_engine = 0;
+
+static int current_power = 0;
 
 static char *PROFILES[] = {
 	"Commute",
@@ -43,11 +88,11 @@ static char *PROFILES[] = {
 	"2 up"
 };
 
-static int current_profile = 0;
 	
 //Main Screen *************************************************************************************
 #define NUM_FIRST_MENU_SECTIONS 2
 #define NUM_FIRST_MENU_ITEMS 3
+
 	
 Window* window;
 
@@ -62,6 +107,7 @@ static SimpleMenuItem first_menu_items[NUM_FIRST_MENU_ITEMS];
 //Settings Screen *********************************************************************************
 #define NUM_SETTINGS_MENU_SECTIONS 2
 #define NUM_SETTINGS_MENU_ITEMS 3
+#define NUM_FUNCTIONS_MENU_ITEMS 6
 	
 Window* settings;
 
@@ -70,6 +116,7 @@ static SimpleMenuLayer *simple_menu_layer_settings;
 static SimpleMenuSection settings_menu_sections[NUM_SETTINGS_MENU_SECTIONS];
 
 static SimpleMenuItem settings_menu_items[NUM_SETTINGS_MENU_ITEMS];
+static SimpleMenuItem function_menu_items[NUM_FUNCTIONS_MENU_ITEMS];
 
 //************************************************************************************************
 
@@ -228,6 +275,8 @@ static void menu_select_callback_menu_item_6 (){
 	}
 }
 
+
+
 void settings_unload()
 {
 	app_sync_deinit(&sync);
@@ -238,6 +287,7 @@ void settings_unload()
 static void settings_load() {
 	
 	int num_a_items = 0;
+	int num_b_items = 0;
 
   // This is an example of how you'd set a simple menu item
   settings_menu_items[num_a_items++] = (SimpleMenuItem){
@@ -257,12 +307,50 @@ static void settings_load() {
       .subtitle = ABS[current_abs],
       .callback = menu_select_callback_menu_item_6,
   };
+	
+  function_menu_items[num_b_items++] = (SimpleMenuItem){
+    .title = "Low Beam",
+      .subtitle = ABS[current_lowbeam],
+     // .callback = menu_select_callback_menu_item_7,
+  };
+  function_menu_items[num_b_items++] = (SimpleMenuItem){
+    .title = "High Beam",
+      .subtitle = ABS[current_highbeam],
+     // .callback = menu_select_callback_menu_item_8,
+  };
+  function_menu_items[num_b_items++] = (SimpleMenuItem){
+    .title = "Flasher",
+      .subtitle = ABS[current_flasher],
+     // .callback = menu_select_callback_menu_item_9,
+  };
+  function_menu_items[num_b_items++] = (SimpleMenuItem){
+    .title = "Honk",
+      .subtitle = ABS[current_honk],
+     // .callback = menu_select_callback_menu_item_10,
+  };	
+  function_menu_items[num_b_items++] = (SimpleMenuItem){
+    .title = "Power",
+      .subtitle = ABS[current_power],
+     // .callback = menu_select_callback_menu_item_11,
+  };	
+  function_menu_items[num_b_items++] = (SimpleMenuItem){
+    .title = "Engine",
+      .subtitle = ABS[current_engine],
+     // .callback = menu_select_callback_menu_item_12,
+  };		
 
   // Bind the menu items to the corresponding menu sections
   settings_menu_sections[0] = (SimpleMenuSection){
     .title = "Settings",
       .num_items = NUM_SETTINGS_MENU_ITEMS,
       .items = settings_menu_items,
+  };
+	
+  // Bind the menu items to the corresponding menu sections
+  settings_menu_sections[1] = (SimpleMenuSection){
+    .title = "Function Tests",
+      .num_items = NUM_FUNCTIONS_MENU_ITEMS,
+      .items = function_menu_items,
   };
 
   Layer *window_layer = window_get_root_layer(settings);
