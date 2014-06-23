@@ -349,6 +349,161 @@ static void menu_select_callback_menu_item_6 (){
     }
 }
 
+static void menu_select_callback_menu_item_7 (){
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Low Beam Clicked.");
+    
+    switch(current_lowbeam){
+        case 0:
+        
+        function_menu_items[0].subtitle = LOWBEAM[1];
+        current_lowbeam=1;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+        
+        case 1:
+        
+        function_menu_items[0].subtitle = LOWBEAM[0];
+        current_lowbeam=0;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+    }
+}
+
+static void menu_select_callback_menu_item_8 (){
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "High Beam Clicked.");
+    
+    switch(current_highbeam){
+        case 0:
+        
+        function_menu_items[1].subtitle = HIGHBEAM[1];
+        current_highbeam=1;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+        
+        case 1:
+        
+        function_menu_items[1].subtitle = HIGHBEAM[0];
+        current_highbeam=0;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+    }
+}
+
+static void menu_select_callback_menu_item_9 (){
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Flasher Clicked.");
+    
+    switch(current_flasher){
+        case 0:
+        
+        function_menu_items[2].subtitle = FLASHER[1];
+        current_flasher=1;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+        
+        case 1:
+        
+        function_menu_items[2].subtitle = FLASHER[0];
+        current_flasher=0;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+    }
+}
+
+static void menu_select_callback_menu_item_10 (){
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Honk Clicked.");
+    
+    switch(current_honk){
+        case 0:
+        
+        function_menu_items[3].subtitle = HONK[1];
+        current_flasher=1;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+        
+        case 1:
+        
+        function_menu_items[3].subtitle = HONK[0];
+        current_flasher=0;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+    }
+}
+
+static void menu_select_callback_menu_item_11 (){
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Power Clicked.");
+    
+    switch(current_power){
+        case 0:
+        
+        function_menu_items[4].subtitle = POWER[1];
+        current_power=1;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+        
+        case 1:
+        
+        function_menu_items[4].subtitle = POWER[0];
+        current_power=0;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+    }
+}
+
+static void menu_select_callback_menu_item_12 (){
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Engine Clicked.");
+    
+    switch(current_engine){
+        case 0:
+        
+        function_menu_items[5].subtitle = ENGINE[1];
+        current_engine=1;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+        
+        case 1:
+        
+        function_menu_items[5].subtitle = ENGINE[0];
+        current_engine=0;
+        setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
+        
+        layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+        
+        break;
+    }
+}
 
 
 void settings_unload()
@@ -385,32 +540,32 @@ static void settings_load() {
     function_menu_items[num_b_items++] = (SimpleMenuItem){
         .title = "Low Beam",
         .subtitle = ABS[current_lowbeam],
-        // .callback = menu_select_callback_menu_item_7,
+        .callback = menu_select_callback_menu_item_7,
     };
     function_menu_items[num_b_items++] = (SimpleMenuItem){
         .title = "High Beam",
         .subtitle = ABS[current_highbeam],
-        // .callback = menu_select_callback_menu_item_8,
+        .callback = menu_select_callback_menu_item_8,
     };
     function_menu_items[num_b_items++] = (SimpleMenuItem){
         .title = "Flasher",
         .subtitle = ABS[current_flasher],
-        // .callback = menu_select_callback_menu_item_9,
+        .callback = menu_select_callback_menu_item_9,
     };
     function_menu_items[num_b_items++] = (SimpleMenuItem){
         .title = "Honk",
         .subtitle = ABS[current_honk],
-        // .callback = menu_select_callback_menu_item_10,
+        .callback = menu_select_callback_menu_item_10,
     };
     function_menu_items[num_b_items++] = (SimpleMenuItem){
         .title = "Power",
         .subtitle = ABS[current_power],
-        // .callback = menu_select_callback_menu_item_11,
+        .callback = menu_select_callback_menu_item_11,
     };
     function_menu_items[num_b_items++] = (SimpleMenuItem){
         .title = "Engine",
         .subtitle = ABS[current_engine],
-        // .callback = menu_select_callback_menu_item_12,
+        .callback = menu_select_callback_menu_item_12,
     };
     
     // Bind the menu items to the corresponding menu sections
@@ -533,6 +688,3 @@ int main(void) {
     
     deinit();
 }
-
-	
-	 
