@@ -37,33 +37,33 @@ static char *ABS[] = {
 	"ON"
 };
 
-static char *LowBeam[] = {
+static char *LOWBEAM[] = {
 	"OFF",
 	"ON"
 };
 
-static char *Highbeam[] = {
+static char *HIGHBEAM[] = {
 	"OFF",
 	"ON"
 };
 
-static char *Flasher[] = {
+static char *FLASHER[] = {
 	"OFF",
 	"Left",
 	"Right"
 };
 
-static char *Honk[] = {
+static char *HONK[] = {
 	"OFF",
 	"ON"
 };
 
-static char *Engine[] = {
+static char *ENGINE[] = {
 	"OFF",
 	"ON"
 };
 
-static char *Power[] = {
+static char *POWER[] = {
 	"OFF",
 	"ON"
 };
@@ -236,6 +236,12 @@ static void setDictionaryWithClick(char* mode, char* grips, char* abs, char* pro
  APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_GRIPS_KEY: %s",grips);
  APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_ABS_KEY: %s",abs);
  APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_PROFILES_KEY: %s",profile);
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_LOW_BEAM_KEY: %s",lowbeam);
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_HIGH_BEAM_KEY: %s",highbeam);
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_FLASHER_KEY: %s",flasher);
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_HONK_KEY: %s",honk);
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_POWER_KEY: %s",power);
+ APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_ENGINE_KEY: %s",engine);
 	
  app_sync_set(&sync, new_tuples, 3);
 }
@@ -252,7 +258,7 @@ static void menu_select_callback_menu_item_4 (){
 		
 		settings_menu_items[0].subtitle = RIDE_MODES[1];
 		current_ride_mode=1;
-		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -262,7 +268,7 @@ static void menu_select_callback_menu_item_4 (){
 		
 		settings_menu_items[0].subtitle = RIDE_MODES[2];
 		current_ride_mode=2;
-		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -272,7 +278,7 @@ static void menu_select_callback_menu_item_4 (){
 		
 		settings_menu_items[0].subtitle = RIDE_MODES[3];
 		current_ride_mode=3;
-		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
 		
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -282,7 +288,7 @@ static void menu_select_callback_menu_item_4 (){
 		
 		settings_menu_items[0].subtitle = RIDE_MODES[0];
 		current_ride_mode=0;
-		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -299,7 +305,7 @@ static void menu_select_callback_menu_item_5 (){
 		
 		settings_menu_items[1].subtitle = GRIP[1];
 		current_grip=1;
-		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -309,7 +315,7 @@ static void menu_select_callback_menu_item_5 (){
 		
 		settings_menu_items[1].subtitle = GRIP[0];
 		current_grip=0;
-		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -325,7 +331,7 @@ static void menu_select_callback_menu_item_6 (){
 		
 		settings_menu_items[2].subtitle = ABS[1];
 		current_abs=1;
-		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -335,7 +341,7 @@ static void menu_select_callback_menu_item_6 (){
 		
 		settings_menu_items[2].subtitle = ABS[0];
 		current_abs=0;
-		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile]);
+		setDictionaryWithClick(RIDE_MODES[current_ride_mode],GRIP[current_grip],ABS[current_abs],PROFILES[current_profile],LOWBEAM[current_lowbeam],HIGHBEAM[current_highbeam],FLASHER[current_flasher],HONK[current_honk],POWER[current_power],ENGINE[current_engine]);
 
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
@@ -428,7 +434,13 @@ static void settings_load() {
    TupletCString(DUCATI_RIDE_MODE_KEY, RIDE_MODES[current_ride_mode] ),
    TupletCString(DUCATI_GRIPS_KEY, GRIP[current_grip]),
    TupletCString(DUCATI_ABS_KEY, ABS[current_abs]),  
-   TupletCString(DUCATI_PROFILES_KEY, PROFILES[current_profile])   
+   TupletCString(DUCATI_PROFILES_KEY, PROFILES[current_profile]),
+   TupletCString(DUCATI_LOW_BEAM_KEY, LOWBEAM[current_lowbeam]), 
+   TupletCString(DUCATI_HIGH_BEAM_KEY, HIGHBEAM[current_highbeam]),
+   TupletCString(DUCATI_FLASHER_KEY, FLASHER[current_flahser]),
+   TupletCString(DUCATI_HONK_KEY, HONK[current_honk]), 
+   TupletCString(DUCATI_POWER_KEY, POWER[current_power]),
+   TupletCString(DUCATI_ENGINE_KEY, ENGINE[current_engine]) 
  };
 	
   app_sync_init(&sync, sync_buffer, sizeof(sync_buffer), initial_values, ARRAY_LENGTH(initial_values),
