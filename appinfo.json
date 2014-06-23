@@ -1,65 +1,65 @@
 {
-    "companyName": "michael.buthut@vw.com",
-    "shortName": "Ducati Azione",
-    "longName": "Ducati Azione",
+    "versionLabel": "0.9",
+    "appKeys": {},
+    "versionCode": 1,
     "watchapp": {
         "watchface": false
     },
-    "uuid": "49c202a3-ae9e-4cab-93b1-2cb35f004e8c",
+    "longName": "Ducati Azione",
+    "shortName": "Ducati Azione",
+    "companyName": "michael.buthut@vw.com",
+    "capabilities": [
+        ""
+    ],
     "resources": {
         "media": [
             {
                 "file": "images/Capture (1).PNG",
-                "name": "IMAGE_STATISTICS_PLACEHOLDER",
-                "type": "png"
+                "type": "png",
+                "name": "IMAGE_STATISTICS_PLACEHOLDER"
             },
             {
                 "file": "images/shield1_28x28.png",
-                "name": "IMAGE_APP_ICON_DUCATI",
+                "menuIcon": true,
                 "type": "png",
-                "menuIcon": true
+                "name": "IMAGE_APP_ICON_DUCATI"
             },
             {
                 "file": "images/profile_tandem1_28x28.png",
-                "name": "IMAGE_PROFILE_ICON_2UP",
-                "type": "png"
+                "type": "png",
+                "name": "IMAGE_PROFILE_ICON_2UP"
             },
             {
                 "file": "images/profile_race1_28x28.png",
-                "name": "IMAGE_PROFILE_ICON_RACE",
-                "type": "png"
+                "type": "png",
+                "name": "IMAGE_PROFILE_ICON_RACE"
             },
             {
                 "file": "images/profile_commute1_28x28.png",
-                "name": "IMAGE_PROFILE_ICON_COMMUTE",
-                "type": "png"
+                "type": "png",
+                "name": "IMAGE_PROFILE_ICON_COMMUTE"
             },
             {
                 "file": "images/statusbarAppIcon1_11x11.png",
-                "name": "IMAGE_STATUS_BAR_ICON_DUCATI",
-                "type": "png"
+                "type": "png",
+                "name": "IMAGE_STATUS_BAR_ICON_DUCATI"
             },
             {
                 "file": "images/statistics1_28x28.png",
-                "name": "IMAGE_MENU_ICON_STATISTICS",
-                "type": "png"
+                "type": "png",
+                "name": "IMAGE_MENU_ICON_STATISTICS"
             },
             {
                 "file": "images/profiles1_28x28.png",
-                "name": "IMAGE_MENU_ICON_PROFILES",
-                "type": "png"
+                "type": "png",
+                "name": "IMAGE_MENU_ICON_PROFILES"
             },
             {
                 "file": "images/settings1_28x28.png",
-                "name": "IMAGE_MENU_ICON_SETTINGS",
-                "type": "png"
+                "type": "png",
+                "name": "IMAGE_MENU_ICON_SETTINGS"
             }
         ]
     },
-    "capabilities": [
-        ""
-    ],
-    "appKeys": {},
-    "versionLabel": "0.9",
-    "versionCode": 1
+    "uuid": "49c202a3-ae9e-4cab-93b1-2cb35f004e8c"
 }

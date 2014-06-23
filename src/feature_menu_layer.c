@@ -10,7 +10,13 @@ enum DUCATI_KEY {
   DUCATI_RIDE_MODE_KEY = 0x0,         
   DUCATI_GRIPS_KEY = 0x1, 
   DUCATI_ABS_KEY = 0x2,
-  DUCATI_PROFILES_KEY = 0x3
+  DUCATI_LOW_BEAM_KEY = 0x3
+  DUCATI_HIGH_BEAM_KEY = 0x4
+  DUCATI_FLASHER_KEY = 0x5
+  DUCATI_HONK_KEY = 0x6
+  DUCATI_POWER_KEY = 0x7
+  DUCATI_ENGINE_KEY = 0x8
+	  
 };
 
 
@@ -152,16 +158,78 @@ static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tup
   		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
 
      break;
+	  
+	case DUCATI_LOW_BEAM_KEY:
+      	APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_LOW_BEAM_KEY");
+ 	
+		function_menu_items[0].subtitle = (new_tuple->value->cstring);
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+     break;
+	  
+	case DUCATI_HIGH_BEAM_KEY:
+      	APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_HIGH_BEAM_KEY");
+ 	
+		function_menu_items[1].subtitle = (new_tuple->value->cstring);
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+     break;
+
+	case DUCATI_FLASHER_KEY:
+      	APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_FLASHER_KEY");
+ 	
+		function_menu_items[2].subtitle = (new_tuple->value->cstring);
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+     break;
+
+	case DUCATI_HONK_KEY:
+      	APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_HONK_KEY");
+ 	
+		function_menu_items[3].subtitle = (new_tuple->value->cstring);
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+     break;
+	  
+	case DUCATI_POWER_KEY:
+      	APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_POWER_KEY");
+ 	
+		function_menu_items[4].subtitle = (new_tuple->value->cstring);
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+     break;
+	  
+	case DUCATI_ENGINE_KEY:
+      	APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_ENGINE_KEY");
+ 	
+		function_menu_items[5].subtitle = (new_tuple->value->cstring);
+
+  		layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer_settings));
+
+     break;
+	  
    }
 	
 }
 
-static void setDictionaryWithClick(char* mode, char* grips, char* abs, char* profile){
+static void setDictionaryWithClick(char* mode, char* grips, char* abs, char* profile, char* lowbeam, char* highbeam, char* flasher, char* honk, char* power, char* engine){
   Tuplet new_tuples[] = {
    TupletCString(DUCATI_RIDE_MODE_KEY, mode ),
    TupletCString(DUCATI_GRIPS_KEY, grips),
    TupletCString(DUCATI_ABS_KEY, abs),  
-   TupletCString(DUCATI_PROFILES_KEY, profile)   
+   TupletCString(DUCATI_PROFILES_KEY, profile), 
+   TupletCString(DUCATI_LOW_BEAM_KEY, lowbeam), 
+   TupletCString(DUCATI_HIGH_BEAM_KEY, highbeam),
+   TupletCString(DUCATI_FLASHER_KEY, flasher),
+   TupletCString(DUCATI_HONK_KEY, honk, 
+   TupletCString(DUCATI_POWER_KEY, power),
+   TupletCString(DUCATI_ENGINE_KEY, engine) 
+
  };
 	
  APP_LOG(APP_LOG_LEVEL_DEBUG, "DUCATI_RIDE_MODE_KEY: %s",mode);
